@@ -1,0 +1,13 @@
+{{ block title }}Les règles{{ endblock }}
+{{ block content }}
+{{ include_sibling '_style.html' }}
+<p>Vous êtes viticulteur ou viticultrice. Avec deux autres exploitants, vous partagez une <b>réserve d'eau commune</b> pour l'irrigation. Le jeu dure <b>{{ C.NUM_ROUNDS }} tours</b>, toujours avec les mêmes voisins.</p>
+<div class="card-eau">
+  <p>À chaque tour, vous recevez <b>{{ C.ENDOWMENT }}</b> d'eau. Vous choisissez combien en verser dans la réserve.</p>
+  <p>La réserve fait mieux que la somme de ses parts : son contenu est <b>multiplié par {{ C.MULTIPLIER }}</b>, puis partagé à égalité entre les {{ C.PLAYERS_PER_GROUP }} exploitants.</p>
+  <p>Votre gain du tour = ce que vous gardez + votre part de la réserve.</p>
+</div>
+<p>À la fin, <b>un tour tiré au sort</b> est payé. Chaque tour peut donc compter.</p>
+{{ formfields }}
+{{ next_button }}
+{{ endblock }}

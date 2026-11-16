@@ -1,0 +1,15 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  bots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Bots, condition de base
+        run: otree test irrigation_base 6
+      - name: Bots, condition avec norme
+        run: otree test irrigation_norme 6

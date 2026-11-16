@@ -1,0 +1,23 @@
+# Déploiement sur une machine virtuelle Linux : oTree + PostgreSQL, données persistantes
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: otree
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-change-me}
+      POSTGRES_DB: otree
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on: [db]
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgres://otree:${DB_PASSWORD:-change-me}@db/otree
+      OTREE_ADMIN_PASSWORD: ${OTREE_ADMIN_PASSWORD:-change-me}
+      OTREE_SECRET_KEY: ${OTREE_SECRET_KEY:-change-me}
+volumes:
+  pgdata:

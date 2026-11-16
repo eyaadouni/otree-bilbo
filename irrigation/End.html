@@ -1,0 +1,9 @@
+{{ block title }}Merci pour votre participation{{ endblock }}
+{{ block content }}
+{{ include_sibling '_style.html' }}
+<div class="card-eau">
+  <p>Le tour tiré au sort est le <b>tour {{ paid_round }}</b>.</p>
+  <p>Votre gain total, avec la participation : <span class="chiffre">{{ total }}</span></p>
+</div>
+<p>Vous pouvez rendre la tablette à l'expérimentateur.</p>
+{{ endblock }}

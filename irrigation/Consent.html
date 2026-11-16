@@ -1,0 +1,14 @@
+{{ block title }}Bienvenue{{ endblock }}
+{{ block content }}
+{{ include_sibling '_style.html' }}
+<p>Vous allez participer à une courte étude sur la gestion d'une ressource partagée. Elle dure environ 10 minutes.</p>
+<div class="card-eau">
+  <ul>
+    <li>Vos réponses sont anonymes : seul un code aléatoire vous identifie.</li>
+    <li>Vous pouvez arrêter à tout moment.</li>
+    <li>Votre gain dépend de vos décisions et de celles des autres participants.</li>
+  </ul>
+</div>
+{{ formfields }}
+{{ next_button }}
+{{ endblock }}

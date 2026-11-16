@@ -1,0 +1,13 @@
+{{ block title }}Résultat du tour {{ player.round_number }}{{ endblock }}
+{{ block content }}
+{{ include_sibling '_style.html' }}
+<table class="table res">
+  <tr><td>Vous avez versé</td><td><b>{{ player.contribution }}</b></td></tr>
+  <tr><td>Les autres ont versé</td><td>{{ others }}</td></tr>
+  <tr><td>Total de la réserve</td><td>{{ group.total_contribution }}</td></tr>
+  <tr><td>Votre part de la réserve</td><td>{{ group.individual_share }}</td></tr>
+  <tr><td>Ce que vous avez gardé</td><td>{{ kept }}</td></tr>
+  <tr><th>Votre gain du tour</th><th class="chiffre">{{ player.payoff }}</th></tr>
+</table>
+{{ next_button }}
+{{ endblock }}

@@ -1,0 +1,18 @@
+{{ block title }}Tour {{ player.round_number }} sur {{ C.NUM_ROUNDS }}{{ endblock }}
+{{ block content }}
+{{ include_sibling '_style.html' }}
+<p>Ce tour-ci, vous disposez de <span class="chiffre">{{ C.ENDOWMENT }}</span> d'eau.</p>
+{{ if show_norm }}
+<div class="card-eau">Au tour précédent, les exploitants de votre groupe ont versé en moyenne <b>{{ previous_average }}</b> d'eau dans la réserve.</div>
+{{ endif }}
+{{ formfield 'contribution' }}
+<input type="hidden" name="decision_seconds" id="decision_seconds">
+{{ next_button }}
+<script>
+  // Temps de décision, utile pour le contrôle qualité des données
+  const t0 = performance.now();
+  document.querySelector('form').addEventListener('submit', () => {
+    document.getElementById('decision_seconds').value = ((performance.now() - t0) / 1000).toFixed(2);
+  });
+</script>
+{{ endblock }}
