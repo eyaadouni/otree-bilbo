@@ -1,4 +1,5 @@
 # Déploiement sur une machine virtuelle Linux : oTree + PostgreSQL, données persistantes
+# Supervision : chaque service a un healthcheck ; Docker redémarre un service qui tombe.
 services:
   db:
     image: postgres:16
@@ -9,15 +10,27 @@ services:
       POSTGRES_DB: otree
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U otree"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
   web:
     build: .
     restart: unless-stopped
-    depends_on: [db]
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8000:8000"
     environment:
       DATABASE_URL: postgres://otree:${DB_PASSWORD:-change-me}@db/otree
       OTREE_ADMIN_PASSWORD: ${OTREE_ADMIN_PASSWORD:-change-me}
       OTREE_SECRET_KEY: ${OTREE_SECRET_KEY:-change-me}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 volumes:
   pgdata:
