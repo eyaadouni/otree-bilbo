@@ -46,6 +46,8 @@ docker compose run --rm web otree resetdb --noinput   # une seule fois
 docker compose up -d
 ```
 oTree tourne avec **PostgreSQL** ; les données restent dans un volume Docker.
+
+**Supervision** : la base et le serveur ont chacun un *healthcheck*, et Docker redémarre automatiquement un service qui tombe. L'état se vérifie avec `docker compose ps` (colonne *STATUS* : `healthy`).
 Sauvegarde quotidienne de la base, avec rotation sur 30 jours :
 
 ```bash
